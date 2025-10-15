@@ -24,7 +24,7 @@ services:
   mysql:
     # Imagem do MySQL do Docker Hub
     image: mariadb:latest
-    container_name: database
+    container_name: mysql
     # Configurações de acesso e db do mysql
     environment:
       MARIADB_ROOT_PASSWORD_FILE: /run/secrets/rootsec
