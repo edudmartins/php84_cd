@@ -10,7 +10,7 @@ services:
       - "8080:80"
     # Facilitando as configurações os volumes são os alias de pastas e arquvivos do Apache e PHP para pasta do docker-compose   
     volumes:
-      - /mnt/Controle/apps/sistemas:/var/www/html
+      - /mnt/Controle/apps/sistemas:/var/www
       - /mnt/Controle/apps/config/php.ini:/etc/php/8.4/apache2/php.ini
       - /mnt/Controle/apps/config/000-default.conf:/etc/apache2/sites-available/000-default.conf
       - /mnt/Controle/apps/config/apache2.conf:/etc/apache2/apache2.conf
