@@ -45,9 +45,6 @@ RUN cd /usr/local/lib/ && curl -sS https://getcomposer.org/installer | php && mv
 # Instala o CA Certificates para futura configuração SSL
 RUN apt-get install --reinstall ca-certificates -y
 
-# Cria a pasta src, que é a pasta onde ficará sua aplicação
-ADD src/ /var/www/html/src
-
 # Seta as permissões da pasta src
 RUN chown $USER:www-data -R /var/www/html/src
 RUN chmod u=rwX,g=srX,o=rX -R /var/www/html/src
