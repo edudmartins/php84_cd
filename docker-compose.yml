@@ -21,7 +21,7 @@ services:
         limits:
           cpus: '1'
           memory: 4G 
-mysql:
+  mysql:
     # Imagem do MySQL do Docker Hub
     image: mariadb:latest
     container_name: database
