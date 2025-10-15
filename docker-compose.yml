@@ -1,0 +1,41 @@
+# Em services definiremos nossos containers
+services:
+
+  # App é nosso primeiro container que contém o Apache e o PHP confiugrado no Dockerfile
+  app:
+    container_name: php_server
+    build: .
+    # Porta exposta para o Apache
+    ports:
+      - "8080:80"
+    # Facilitando as configurações os volumes são os alias de pastas e arquvivos do Apache e PHP para pasta do docker-compose   
+    volumes:
+      - /mnt/Controle/apps/sistemas:/var/www/html/src
+      - /mnt/Controle/apps/config/php.ini:/etc/php/8.1/apache2/php.ini
+      - /mnt/Controle/apps/config/000-default.conf:/etc/apache2/sites-available/000-default.conf
+      - /mnt/Controle/apps/config/apache2.conf:/etc/apache2/apache2.conf
+      - /mnt/Controle/apps/config/log/apache2:/var/log/apache2
+    # Configuração do uso de recursos da virtualização
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 4G 
+
+# phpmyadmin é nosso terceiro container que contém a imagem oficial do phpmyadmin
+  phpmyadmin:
+    # Imagem do phpMyAdmin do Docker Hub
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    # Configurações de link do banco de dados com o phpMyAdmin
+    links:
+      - database
+    environment:
+      PMA_HOST: database
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+      UPLOAD_LIMIT: 300M
+    restart: always
+    # Porta exposta para o uso phpMyAdmin
+    ports:
+      - 28080:80
