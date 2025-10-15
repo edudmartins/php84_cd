@@ -55,9 +55,9 @@ services:
     container_name: phpmyadmin
     # Configurações de link do banco de dados com o phpMyAdmin
     links:
-      - database
+      - mysql
     environment:
-      PMA_HOST: database
+      PMA_HOST: mysql
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
       UPLOAD_LIMIT: 300M
