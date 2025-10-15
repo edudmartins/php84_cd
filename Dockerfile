@@ -46,10 +46,10 @@ RUN cd /usr/local/lib/ && curl -sS https://getcomposer.org/installer | php && mv
 RUN apt-get install --reinstall ca-certificates -y
 
 # Seta as permissões da pasta src
-RUN chown $USER:www-data -R /var/www/html/src
-RUN chmod u=rwX,g=srX,o=rX -R /var/www/html/src
-RUN find /var/www/html/src -type d -exec chmod g=rwxs "{}" \;
-RUN find /var/www/html/src -type f -exec chmod g=rws "{}" \;
+RUN chown $USER:www-data -R /var/www
+RUN chmod u=rwX,g=srX,o=rX -R /var/www
+RUN find /var/www -type d -exec chmod g=rwxs "{}" \;
+RUN find /var/www -type f -exec chmod g=rws "{}" \;
 
 # Ativa Apache mod_rewrite
 RUN a2enmod rewrite
