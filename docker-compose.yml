@@ -21,7 +21,33 @@ services:
         limits:
           cpus: '1'
           memory: 4G 
-
+mysql:
+    # Imagem do MySQL do Docker Hub
+    image: mariadb:latest
+    container_name: database
+    # Configurações de acesso e db do mysql
+    environment:
+      MARIADB_ROOT_PASSWORD_FILE: /run/secrets/rootsec
+      MYSQL_USER: sistema
+      MYSQL_PASSWORD: 'BdWntOdoWJ'
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    # Porta exposta para o MySQL
+    ports:
+      - "3306:3306"
+    # Facilitando as configurações os volumes são os alias de pastas e arquvivos do MySQL para pasta do docker-compose   
+    volumes:
+      - /mnt/Controle/apps/config/my.cnf:/etc/mysql/conf.d/my.cnf
+      - /mnt/Controle/apps/mysql:/var/lib/mysql
+      - /mnt/Controle/apps/config/log/mysql:/var/log/mysql
+      - /mnt/Controle/apps/config/rootsec:/run/secrets/rootsec
+    # Configuração do uso de recursos da virtualização
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 4G
+          
 # phpmyadmin é nosso terceiro container que contém a imagem oficial do phpmyadmin
   phpmyadmin:
     # Imagem do phpMyAdmin do Docker Hub
